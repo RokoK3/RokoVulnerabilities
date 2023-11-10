@@ -1,0 +1,46 @@
+@page
+@model VulnerableModel
+
+<h2>SQL Umetanje</h2>
+Ako je ranjivost uključena i korisnik u neko polje unese <i>' OR '1'='1' -- </i> aplikacija će prikazati sve korisnike u sustavu.
+<form method="post">
+    <div>
+        <label for="vulnerableToggle">Dozvoli SQL umetanje:</label>
+        <input type="checkbox" id="vulnerableToggle" name="IsVulnerable" value="true" />
+    </div>
+    <div>
+        <label for="username">Korisničko ime:</label>
+        <input type="text" id="username" name="username" />
+        <label for="password">Lozinka:</label>
+        <input type="password" id="password" name="password" />
+        <input type="submit" name="action" value="Prijava" />
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <pre>@Model.Message</pre>
+}
+
+<hr>
+
+<h2>Loša autentifikacija</h2>
+Ako je ranjivost uključena korisnik može kreirati profil sa jednostavnom lozinkom(barem 4 znaka). Inače, lozinka mora biti dugačka barem 8 znakova i sadržavati barem jedno veliko slovo, jedno malo slovo i jedan broj.
+<form method="post">
+    <div>
+        <label for="allowSimplePassword">Dozvoli jednostavnu lozinku:</label>
+        <input type="checkbox" id="allowSimplePassword" name="AllowSimplePassword" value="true" />
+    </div>
+    <div>
+        <label for="newUsername">Novo korisničko ime:</label>
+        <input type="text" id="newUsername" name="NewUsername" />
+        <label for="newPassword">Nova lozinka:</label>
+        <input type="password" id="newPassword" name="NewPassword" />
+        <input type="submit" name="action" value="Kreiraj profil" />
+    </div>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.Message2))
+{
+    <pre>@Model.Message2</pre>
+}
